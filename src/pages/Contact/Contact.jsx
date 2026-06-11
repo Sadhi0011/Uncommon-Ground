@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { brand } from '../../data/brand';
 import Seo from '../../components/ui/Seo';
 import Reveal from '../../components/ui/Reveal';
+import Select from '../../components/ui/Select';
 import { cn } from '../../utils/format';
 
 const inquiryTypes = [
@@ -19,10 +20,11 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const {
     register,
+    control,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({ defaultValues: { type: '' } });
 
   const onSubmit = async () => {
     await new Promise((r) => setTimeout(r, 800));
@@ -92,7 +94,7 @@ export default function Contact() {
                     width="100%"
                     height="220"
                     loading="lazy"
-                    className="border-0 grayscale contrast-125"
+                    className="border-0"
                     allowFullScreen
                   />
                 </div>
@@ -141,16 +143,22 @@ export default function Contact() {
                   </Field>
 
                   <Field label="Inquiry Type" error={errors.type?.message}>
-                    <select
-                      {...register('type', { required: 'Please select a type' })}
-                      className={inputClass(errors.type)}
-                      defaultValue=""
-                    >
-                      <option value="" disabled>Select...</option>
-                      {inquiryTypes.map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
+                    <Controller
+                      name="type"
+                      control={control}
+                      rules={{ required: 'Please select a type' }}
+                      render={({ field }) => (
+                        <Select
+                          name={field.name}
+                          options={inquiryTypes}
+                          value={field.value}
+                          onChange={field.onChange}
+                          onBlur={field.onBlur}
+                          error={Boolean(errors.type)}
+                          placeholder="Select..."
+                        />
+                      )}
+                    />
                   </Field>
 
                   <Field label="Message" error={errors.message?.message}>
@@ -166,7 +174,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-primary mt-8 w-full disabled:opacity-60"
+                  className="btn-primary mt-8 w-full text-[#fff] disabled:opacity-60"
                 >
                   <Send size={16} /> {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
