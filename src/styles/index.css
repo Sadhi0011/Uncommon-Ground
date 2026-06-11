@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ink-900 text-sand font-body antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-ember text-ink-900;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display tracking-wide;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-ink-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ink-500 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ember;
+  }
+
+  /* Accessible focus rings */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ember ring-offset-2 ring-offset-ink-900;
+  }
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-screen-2xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply font-heading text-xs font-semibold uppercase tracking-wider2 text-ember;
+  }
+
+  .display-hero {
+    @apply font-display uppercase leading-[0.92] tracking-wide;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-heading font-semibold uppercase tracking-luxe transition-all duration-300 focus-visible:ring-2;
+  }
+
+  .btn-primary {
+    @apply btn rounded-full bg-ember px-8 py-4 text-sm text-ink-900 hover:bg-ember-light hover:shadow-glow;
+  }
+
+  .btn-secondary {
+    @apply btn rounded-full border border-white/25 bg-white/5 px-8 py-4 text-sm text-sand backdrop-blur hover:border-teal hover:text-teal;
+  }
+
+  .btn-ghost {
+    @apply btn rounded-full px-6 py-3 text-sm text-sand/80 hover:text-ember;
+  }
+
+  .surface {
+    @apply rounded-3xl border border-white/10 bg-ink-700/70 backdrop-blur-sm;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-ember after:transition-all after:duration-300 hover:after:w-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .grain-overlay::after {
+    content: '';
+    @apply pointer-events-none absolute inset-0 bg-grain opacity-50 mix-blend-overlay;
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Swiper overrides to match the brand */
+.swiper-pagination-bullet {
+  background: rgba(244, 240, 232, 0.4) !important;
+  opacity: 1 !important;
+}
+.swiper-pagination-bullet-active {
+  background: #d96a2c !important;
+  width: 22px !important;
+  border-radius: 9999px !important;
+}
