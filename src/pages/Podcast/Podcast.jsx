@@ -143,7 +143,7 @@ export default function Podcast() {
                   className={cn(
                     'rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-luxe transition-colors',
                     category === cat
-                      ? 'bg-teal text-ink-900'
+                      ? 'bg-teal text-onink'
                       : 'border border-white/10 text-haze hover:text-sand'
                   )}
                 >

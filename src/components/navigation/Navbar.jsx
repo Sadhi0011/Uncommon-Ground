@@ -10,18 +10,27 @@ import { useCart } from '../../context/CartContext';
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll';
 import { cn } from '../../utils/format';
 import { EASE } from '../../utils/motion';
+import ThemeToggle from '../ui/ThemeToggle';
 
 export default function Navbar() {
   const scrolled = useScrolled(40);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { count, openCart } = useCart();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   useLockBodyScroll(mobileOpen);
 
   const isActive = (to) => {
-    const base = to.split('?')[0];
+    const [base, query] = to.split('?');
     if (base === '/') return pathname === '/';
-    return pathname.startsWith(base);
+    if (!pathname.startsWith(base)) return false;
+    // Disambiguate links that share a base path but differ by query
+    // (e.g. /shop vs /shop?view=collections).
+    if (base === '/shop') {
+      const linkView = new URLSearchParams(query || '').get('view');
+      const currentView = new URLSearchParams(search).get('view');
+      return (linkView || null) === (currentView || null);
+    }
+    return true;
   };
 
   return (
@@ -33,15 +42,15 @@ export default function Navbar() {
           : 'border-b border-transparent bg-gradient-to-b from-ink-900/60 to-transparent backdrop-blur-[2px]'
       )}
     >
-      <nav className="container-luxe flex h-[72px] items-center justify-between gap-6">
+      <nav className="container-luxe flex h-20 items-center justify-between gap-6">
         {/* Logo */}
         <Link to="/" className="flex shrink-0 items-center" aria-label={`${brand.name} home`}>
           <img
             src={logo}
             alt={brand.name}
-            className="h-9 w-auto sm:h-10"
-            width="120"
-            height="40"
+            className="h-12 w-auto sm:h-14"
+            width="168"
+            height="56"
           />
         </Link>
 
@@ -64,6 +73,7 @@ export default function Navbar() {
 
         {/* Right actions */}
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <button
             type="button"
             onClick={openCart}
@@ -72,7 +82,7 @@ export default function Navbar() {
           >
             <ShoppingBag size={18} />
             {count > 0 && (
-              <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-ember px-1 text-[10px] font-bold text-ink-900">
+              <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-ember px-1 text-[10px] font-bold text-onink">
                 {count}
               </span>
             )}
@@ -141,13 +151,19 @@ export default function Navbar() {
                   </motion.li>
                 ))}
               </ul>
-              <div className="mt-auto space-y-1 text-sm text-haze">
-                <a href={brand.contact.phoneHref} className="block hover:text-ember">
-                  {brand.contact.phone}
-                </a>
-                <a href={`mailto:${brand.contact.email}`} className="block hover:text-ember">
-                  {brand.contact.email}
-                </a>
+              <div className="mt-auto">
+                <div className="mb-5 flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+                  <span className="text-sm font-medium text-sand">Theme</span>
+                  <ThemeToggle />
+                </div>
+                <div className="space-y-1 text-sm text-haze">
+                  <a href={brand.contact.phoneHref} className="block hover:text-ember">
+                    {brand.contact.phone}
+                  </a>
+                  <a href={`mailto:${brand.contact.email}`} className="block hover:text-ember">
+                    {brand.contact.email}
+                  </a>
+                </div>
               </div>
             </motion.div>
           </motion.div>

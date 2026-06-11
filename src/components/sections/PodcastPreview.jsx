@@ -18,7 +18,7 @@ export default function PodcastPreview() {
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-ink-700 p-10">
               <img src={logo} alt="Uncommon Ground Podcast" className="mx-auto h-32 w-auto" />
               <div className="mt-8 flex items-center justify-center gap-3">
-                <span className="grid h-16 w-16 place-items-center rounded-full bg-ember text-ink-900 shadow-glow">
+                <span className="grid h-16 w-16 place-items-center rounded-full bg-ember text-onink shadow-glow">
                   <Play size={24} fill="currentColor" />
                 </span>
               </div>

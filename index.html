@@ -16,6 +16,17 @@
       rel="stylesheet"
     />
     <title>Uncommon Ground | Premium Utah-Made Jerky</title>
+    <script>
+      // Apply saved theme before paint to avoid a flash of the wrong theme.
+      (function () {
+        try {
+          var t = localStorage.getItem('ug-theme') || 'dark';
+          document.documentElement.classList.add(t === 'light' ? 'light' : 'dark');
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

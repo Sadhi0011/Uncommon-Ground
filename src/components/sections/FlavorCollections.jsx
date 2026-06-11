@@ -45,7 +45,7 @@ export default function FlavorCollections() {
                     <h3 className="font-display text-3xl uppercase tracking-wide text-sand transition-colors group-hover:text-ember">
                       {collection.name}
                     </h3>
-                    <span className="grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-white/5 text-sand backdrop-blur transition-all duration-300 group-hover:border-ember group-hover:bg-ember group-hover:text-ink-900">
+                    <span className="grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-white/5 text-sand backdrop-blur transition-all duration-300 group-hover:border-ember group-hover:bg-ember group-hover:text-onink">
                       <ArrowUpRight size={18} />
                     </span>
                   </div>

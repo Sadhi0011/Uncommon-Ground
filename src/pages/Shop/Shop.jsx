@@ -130,7 +130,7 @@ export default function Shop() {
                     className={cn(
                       'rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-luxe transition-colors',
                       meat === m
-                        ? 'bg-ember text-ink-900'
+                        ? 'bg-ember text-onink'
                         : 'border border-white/10 text-haze hover:text-sand'
                     )}
                   >
@@ -161,7 +161,7 @@ export default function Shop() {
               onClick={() => setParams({})}
               className={cn(
                 'rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-luxe transition-colors',
-                !collectionSlug ? 'bg-teal text-ink-900' : 'border border-white/10 text-haze hover:text-sand'
+                !collectionSlug ? 'bg-teal text-onink' : 'border border-white/10 text-haze hover:text-sand'
               )}
             >
               All Flavors
@@ -174,7 +174,7 @@ export default function Shop() {
                 className={cn(
                   'rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-luxe transition-colors',
                   collectionSlug === col.slug
-                    ? 'bg-teal text-ink-900'
+                    ? 'bg-teal text-onink'
                     : 'border border-white/10 text-haze hover:text-sand'
                 )}
               >

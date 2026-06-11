@@ -46,7 +46,7 @@ export default function Reviews() {
                     <img
                       src={t.avatar}
                       alt=""
-                      className="h-12 w-12 rounded-full border border-white/10 bg-white object-cover"
+                      className="h-12 w-12 rounded-full border border-white/10 bg-[#fff] object-cover"
                       loading="lazy"
                     />
                     <div>

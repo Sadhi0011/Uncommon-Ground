@@ -45,20 +45,20 @@ export default function Footer() {
             <label className="mb-2 block font-heading text-xs uppercase tracking-luxe text-sand">
               Join the community
             </label>
-            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 p-1.5 focus-within:border-ember">
+            <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/5 p-1.5 transition-colors focus-within:border-ember">
               <Mail size={16} className="ml-3 shrink-0 text-haze" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
-                className="w-full bg-transparent py-2 text-sm text-sand placeholder:text-haze focus:outline-none"
+                className="w-full bg-transparent py-2 text-sm text-sand placeholder:text-haze focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                 aria-label="Email address"
                 required
               />
               <button
                 type="submit"
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ember text-ink-900 transition-colors hover:bg-ember-light"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-ember text-onink transition-colors hover:bg-ember-light"
                 aria-label="Subscribe"
               >
                 <ArrowRight size={16} />

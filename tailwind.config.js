@@ -1,18 +1,29 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
+        // Theme-driven neutral tokens (flip between dark/light via CSS variables).
+        white: 'rgb(var(--w) / <alpha-value>)',
         ink: {
-          DEFAULT: '#0B0B0B',
-          900: '#0B0B0B',
-          800: '#111111',
-          700: '#171717',
-          600: '#1F1F1F',
-          500: '#262626',
+          DEFAULT: 'rgb(var(--ink-900) / <alpha-value>)',
+          900: 'rgb(var(--ink-900) / <alpha-value>)',
+          800: 'rgb(var(--ink-800) / <alpha-value>)',
+          700: 'rgb(var(--ink-700) / <alpha-value>)',
+          600: 'rgb(var(--ink-600) / <alpha-value>)',
+          500: 'rgb(var(--ink-500) / <alpha-value>)',
         },
+        sand: {
+          DEFAULT: 'rgb(var(--sand) / <alpha-value>)',
+          dark: '#E5DECF',
+        },
+        haze: 'rgb(var(--haze) / <alpha-value>)',
+        // Fixed "dark text on a bright accent" token — never changes with theme.
+        onink: '#0B0B0B',
         charcoal: '#171717',
+        // Brand accents — fixed, legible on both themes.
         ember: {
           DEFAULT: '#D96A2C',
           light: '#E8854A',
@@ -23,11 +34,6 @@ export default {
           light: '#5BD7D9',
           dark: '#1E9799',
         },
-        sand: {
-          DEFAULT: '#F4F0E8',
-          dark: '#E5DECF',
-        },
-        haze: '#9CA3AF',
       },
       fontFamily: {
         display: ['"Bebas Neue"', 'Oswald', 'sans-serif'],

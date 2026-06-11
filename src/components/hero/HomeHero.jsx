@@ -63,7 +63,7 @@ export default function HomeHero() {
           transition={{ duration: 0.7, delay: 0.4, ease: EASE }}
           className="mt-9 flex flex-wrap items-center gap-4"
         >
-          <Link to="/shop" className="btn-primary">
+          <Link to="/shop" className="btn-primary text-[#fff]">
             Shop Jerky
           </Link>
           <Link to="/podcast" className="btn-secondary">

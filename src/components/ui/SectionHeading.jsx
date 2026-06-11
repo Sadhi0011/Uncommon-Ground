@@ -17,7 +17,7 @@ export default function SectionHeading({
         <h2
           className={cn(
             'display-hero text-4xl sm:text-5xl lg:text-6xl',
-            light ? 'text-ink-900' : 'text-sand'
+            light ? 'text-onink' : 'text-sand'
           )}
         >
           {title}

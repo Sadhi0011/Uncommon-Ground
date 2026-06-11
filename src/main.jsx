@@ -5,15 +5,18 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import App from './App';
 import { CartProvider } from './context/CartContext';
+import { ThemeProvider } from './context/ThemeContext';
 import './styles/index.css';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelmetProvider>
       <BrowserRouter>
-        <CartProvider>
-          <App />
-        </CartProvider>
+        <ThemeProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </ThemeProvider>
       </BrowserRouter>
     </HelmetProvider>
   </StrictMode>

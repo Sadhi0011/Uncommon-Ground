@@ -29,7 +29,7 @@ export default function ProductCard({ product, onQuickView, index = 0 }) {
         {/* Badges */}
         <div className="absolute left-4 top-4 flex flex-col gap-2">
           {product.badge && (
-            <span className="rounded-full bg-ember px-3 py-1 text-[10px] font-bold uppercase tracking-luxe text-ink-900">
+            <span className="rounded-full bg-ember px-3 py-1 text-[10px] font-bold uppercase tracking-luxe text-onink">
               {product.badge}
             </span>
           )}
@@ -54,7 +54,7 @@ export default function ProductCard({ product, onQuickView, index = 0 }) {
           <button
             type="button"
             onClick={() => addItem(product, 1)}
-            className="btn flex-1 rounded-full bg-ember px-4 py-3 text-xs text-ink-900 hover:bg-ember-light"
+            className="btn flex-1 rounded-full bg-ember px-4 py-3 text-xs text-onink hover:bg-ember-light"
           >
             <Plus size={15} /> Quick Add
           </button>

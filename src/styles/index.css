@@ -3,11 +3,40 @@
 @tailwind utilities;
 
 @layer base {
+  /* Dark theme (default) — deep cinematic surfaces with clear layering */
   :root {
     color-scheme: dark;
+    --ink-900: 8 8 9;
+    --ink-800: 16 16 18;
+    --ink-700: 24 24 27;
+    --ink-600: 34 34 38;
+    --ink-500: 44 44 49;
+    --sand: 244 240 232;
+    --haze: 161 161 170;
+    /* White used for glass overlays/hairlines (bg-white/5, border-white/10) */
+    --w: 255 255 255;
+    /* Opacity for translucent card surfaces so layering reads crisply */
+    --surface-alpha: 0.72;
+  }
+
+  /* Light theme — clean pure-white surfaces */
+  .light {
+    color-scheme: light;
+    --ink-900: 255 255 255;
+    --ink-800: 247 248 250;
+    --ink-700: 255 255 255;
+    --ink-600: 252 252 253;
+    --ink-500: 238 240 243;
+    --sand: 17 18 21;
+    --haze: 90 94 102;
+    /* Dark token for glass overlays/hairlines so they show on white */
+    --w: 17 19 24;
+    /* Fully opaque so cards/surfaces are pure white in light mode */
+    --surface-alpha: 1;
   }
 
   html {
+    @apply transition-colors duration-300;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -19,7 +48,7 @@
   }
 
   ::selection {
-    @apply bg-ember text-ink-900;
+    @apply bg-ember text-onink;
   }
 
   h1, h2, h3, h4 {
@@ -64,7 +93,7 @@
   }
 
   .btn-primary {
-    @apply btn rounded-full bg-ember px-8 py-4 text-sm text-ink-900 hover:bg-ember-light hover:shadow-glow;
+    @apply btn rounded-full bg-ember px-8 py-4 text-sm text-onink hover:bg-ember-light hover:shadow-glow;
   }
 
   .btn-secondary {
@@ -76,7 +105,8 @@
   }
 
   .surface {
-    @apply rounded-3xl border border-white/10 bg-ink-700/70 backdrop-blur-sm;
+    @apply rounded-3xl border border-white/10 backdrop-blur-sm;
+    background-color: rgb(var(--ink-700) / var(--surface-alpha));
   }
 
   .link-underline {
@@ -108,9 +138,24 @@
   }
 }
 
+/*
+ * Theme-aware surface opacity.
+ * These rules are intentionally unlayered so they win over Tailwind's
+ * layered opacity utilities (e.g. bg-ink-700/60). In light mode the surface
+ * alpha is 1 → pure white cards; in dark mode it is tuned for crisp layering.
+ * Modal/nav overlays use ink-900 and are deliberately excluded so their
+ * translucent glass/blur effect is preserved.
+ */
+[class*='bg-ink-700/'] {
+  background-color: rgb(var(--ink-700) / var(--surface-alpha));
+}
+[class*='bg-ink-800/']:not([class*='/90']):not([class*='/85']):not([class*='/80']) {
+  background-color: rgb(var(--ink-800) / var(--surface-alpha));
+}
+
 /* Swiper overrides to match the brand */
 .swiper-pagination-bullet {
-  background: rgba(244, 240, 232, 0.4) !important;
+  background: rgb(var(--sand) / 0.4) !important;
   opacity: 1 !important;
 }
 .swiper-pagination-bullet-active {
