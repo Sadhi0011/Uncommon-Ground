@@ -131,8 +131,12 @@ storefront refetches automatically so changes appear without a manual reload.
 | Method | Path                  | Access | Purpose                              |
 | ------ | --------------------- | ------ | ------------------------------------ |
 | POST   | `/api/orders`         | public | Create an order (checkout)           |
+| GET    | `/api/orders/mine`    | auth   | The signed-in customer's orders      |
 | GET    | `/api/orders`         | admin  | List orders (filters: status/date/q) |
 | GET    | `/api/orders/stats`   | admin  | Aggregated sales (filters: date)     |
+
+Logged-in customers can view their **order history** at `/account/orders` (linked
+from the account chip in the header).
 
 ## 4. Email (SMTP via Nodemailer)
 

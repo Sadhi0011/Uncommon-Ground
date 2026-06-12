@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { pool, query } from '../db/pool.js';
 import { asyncHandler } from '../middleware/error.js';
-import { requireAdmin } from '../middleware/auth.js';
+import { requireAdmin, requireAuth } from '../middleware/auth.js';
 import { sendMail, wrapHtml, escapeHtml } from '../lib/email.js';
 
 const router = Router();
@@ -125,6 +125,42 @@ router.post(
 
     res.status(201).json({
       order: { id, email, subtotalCents: subtotal, shippingCents: shipping, totalCents: total, items },
+    });
+  })
+);
+
+// GET /api/orders/mine  (auth) — the signed-in customer's order history
+router.get(
+  '/mine',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { rows } = await query(
+      `SELECT o.*,
+              COALESCE(json_agg(json_build_object(
+                'productId', oi.product_id,
+                'productName', oi.product_name,
+                'quantity', oi.quantity,
+                'unitPriceCents', oi.unit_price_cents
+              )) FILTER (WHERE oi.id IS NOT NULL), '[]') AS items
+       FROM orders o
+       LEFT JOIN order_items oi ON oi.order_id = o.id
+       WHERE o.user_id = $1 OR o.email = $2
+       GROUP BY o.id
+       ORDER BY o.created_at DESC
+       LIMIT 100`,
+      [req.user.sub, req.user.email]
+    );
+
+    res.json({
+      orders: rows.map((o) => ({
+        id: o.id,
+        status: o.status,
+        subtotalCents: o.subtotal_cents,
+        shippingCents: o.shipping_cents,
+        totalCents: o.total_cents,
+        createdAt: o.created_at,
+        items: o.items,
+      })),
     });
   })
 );

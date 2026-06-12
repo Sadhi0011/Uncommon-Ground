@@ -61,7 +61,10 @@ export default function Cart() {
                 <h2 className="font-display text-3xl uppercase text-sand">Order placed!</h2>
                 <p className="mt-2 text-haze">Thanks for your order — a confirmation is on its way.</p>
               </div>
-              <Link to="/shop" className="btn-primary">Continue Shopping</Link>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Link to="/account/orders" className="btn-primary">View Order History</Link>
+                <Link to="/shop" className="btn-ghost">Continue Shopping</Link>
+              </div>
             </div>
           ) : items.length === 0 ? (
             <div className="mt-16 flex flex-col items-center gap-6 text-center">

@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Loader from './components/ui/Loader';
 import StoreLayout from './components/layout/StoreLayout';
 import RequireAdmin from './components/auth/RequireAdmin';
+import RequireAuth from './components/auth/RequireAuth';
 
 const Home = lazy(() => import('./pages/Home/Home'));
 const Shop = lazy(() => import('./pages/Shop/Shop'));
@@ -15,6 +16,7 @@ const Contact = lazy(() => import('./pages/Contact/Contact'));
 const Cart = lazy(() => import('./pages/Cart/Cart'));
 const Login = lazy(() => import('./pages/Auth/Login'));
 const Signup = lazy(() => import('./pages/Auth/Signup'));
+const AccountOrders = lazy(() => import('./pages/Account/Orders'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 const AdminLayout = lazy(() => import('./pages/Admin/AdminLayout'));
@@ -41,6 +43,14 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route
+            path="/account/orders"
+            element={
+              <RequireAuth>
+                <AccountOrders />
+              </RequireAuth>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
 

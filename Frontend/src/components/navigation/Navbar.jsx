@@ -86,10 +86,14 @@ export default function Navbar() {
                   Dashboard
                 </Link>
               )}
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-luxe text-sand">
+              <Link
+                to="/account/orders"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold uppercase tracking-luxe text-sand transition-colors hover:border-ember hover:text-ember"
+                title="My orders"
+              >
                 <User size={14} className="text-ember" />
                 {user?.name?.split(' ')[0] || 'Account'}
-              </span>
+              </Link>
               <button
                 type="button"
                 onClick={logout}
@@ -207,6 +211,13 @@ export default function Navbar() {
                         Admin Dashboard
                       </Link>
                     )}
+                    <Link
+                      to="/account/orders"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/5 py-3 font-heading text-xs font-semibold uppercase tracking-luxe text-sand"
+                    >
+                      My Orders
+                    </Link>
                     <div className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
                       <span className="inline-flex items-center gap-2 text-sm font-medium text-sand">
                         <User size={16} className="text-ember" />
